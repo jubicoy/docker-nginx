@@ -15,8 +15,12 @@ RUN apt-get update && \
 RUN ln -sf /dev/stdout /var/log/nginx/access.log
 RUN ln -sf /dev/stderr /var/log/nginx/error.log
 
+ADD root /
+RUN mkdir -p /run/nginx \
+  && /usr/libexec/fix-permissions /run/nginx \
+  &&/usr/libexec/fix-permissions /var/cache/nginx \
+  && /usr/libexec/fix-permissions /etc/nginx
+RUN rm /usr/libexec/fix-permissions
 VOLUME ["/var/cache/nginx"]
 
-EXPOSE 80 443
-
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-g", "pid /run/nginx/nginx.pid; daemon off;"]
