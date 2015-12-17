@@ -15,6 +15,7 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log
 RUN ln -sf /dev/stderr /var/log/nginx/error.log
 
 ADD root /
+ADD nginx.conf /etc/nginx/
 RUN useradd -u 104 -m -s /bin/bash nginx \
   && mkdir -p /run/nginx /var/cache/nginx \
   && /usr/libexec/fix-permissions /run/nginx \
