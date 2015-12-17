@@ -1,9 +1,23 @@
 SHELL := /bin/bash
 
-all: container
+ifeq ($(TARGET),light)
+	FLAVOR := light
+else ifeq ($(TARGET),full)
+	FLAVOR := full
+else ifeq ($(TARGET),extras)
+	FLAVOR := extras
+endif
+
+IMAGE_NAME := jubicoy/nginx
 
 container:
-	docker build -t jubicoy/nginx .
+	$(info $(TARGET) $(FLAVOR))
+ifndef FLAVOR
+	$(error TARGET not set or invalid)
+endif
+	pushd $(FLAVOR) \
+		&& docker build -t $(IMAGE_NAME):$(FLAVOR) . \
+		&& popd
 
 push:
-	docker push jubicoy/nginx
+	docker push $(IMAGE_NAME):$(FLAVOR)
