@@ -16,12 +16,13 @@ RUN ln -sf /dev/stderr /var/log/nginx/error.log
 
 ADD root /
 ADD nginx.conf /etc/nginx/
-RUN useradd -u 104 -m -s /bin/bash nginx \
+RUN groupadd -g 107 nginx \
+  && useradd -u 104 -g 107 -m -s /bin/bash nginx \
   && mkdir -p /run/nginx /var/cache/nginx \
   && /usr/libexec/fix-permissions /run/nginx \
   && /usr/libexec/fix-permissions /var/cache/nginx \
-  && /usr/libexec/fix-permissions /etc/nginx
-RUN rm /usr/libexec/fix-permissions
+  && /usr/libexec/fix-permissions /etc/nginx \
+  && /usr/libexec/fix-permissions /var/log/nginx
 VOLUME ["/var/cache/nginx"]
 
 CMD ["nginx", "-g", "daemon off;"]
