@@ -21,6 +21,7 @@ RUN groupadd -g 107 nginx \
   && mkdir -p /run/nginx /var/cache/nginx \
   && /usr/libexec/fix-permissions /run/nginx \
   && /usr/libexec/fix-permissions /var/cache/nginx \
+  && /usr/libexec/fix-permissions /var/lib/nginx \
   && /usr/libexec/fix-permissions /etc/nginx \
   && /usr/libexec/fix-permissions /var/log/nginx
 VOLUME ["/var/cache/nginx"]
