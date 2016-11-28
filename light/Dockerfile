@@ -5,7 +5,7 @@ MAINTAINER Vilppu Vuorinen "vilppu.vuorinen@jubic.fi"
 ENV NGINX_FLAVOR light
 
 RUN  apt-get update \
-  && apt-get -t jessie-backports install -y "nginx-${NGINX_FLAVOR}" \
+  && apt-get install -y "nginx-${NGINX_FLAVOR}" \
   && rm -rf /var/lib/apt/lists/*
 
 # forward request and error logs to docker log collector
