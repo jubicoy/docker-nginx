@@ -4,10 +4,8 @@ MAINTAINER Vilppu Vuorinen "vilppu.vuorinen@jubic.fi"
 
 RUN echo "deb http://http.debian.net/debian jessie-backports main" >> /etc/apt/sources.list
 
-ENV NGINX_FLAVOR light
-
 RUN  apt-get update \
-  && apt-get -t jessie-backports install -y "nginx-${NGINX_FLAVOR}" \
+  && apt-get -t jessie-backports install -y nginx-full \
   && rm -rf /var/lib/apt/lists/*
 
 # forward request and error logs to docker log collector
