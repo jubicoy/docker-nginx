@@ -1,5 +1,4 @@
-# Nginx on Jessie
+# Nginx on Stretch
 
-This repo contains Dockerfiles and resources for Debian Jessie Backports
-Nginx flavors.
+Nginx for Openshift. Lax permissions, NSS wrapper and all that.
 
