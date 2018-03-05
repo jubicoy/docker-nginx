@@ -5,6 +5,7 @@ RUN  apt-get update \
   && apt-get install -y \
     libnss-wrapper \
     gettext \
+    apache2-utils \
   && rm -rf /var/lib/apt/lists/*
 
 ENV USER_NAME nginx
